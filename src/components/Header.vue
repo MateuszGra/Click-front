@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="row">
+      <div class="row left-col">
         <svg class="header-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" id="ico_inbox">
           <path class="eist2" d="M80.7 36.7L97 48v42.9c0 3.4-2.7 6.1-6.1 6.1H9.1C5.7 97 3 94.3 3 90.9V48l16.3-11.2" />
           <path
@@ -24,7 +24,7 @@ export default {
 <style scoped lang="scss">
 .header {
   padding: 2rem 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid var(--border-color);
 
   &-icon {
     width: 2.4rem;
@@ -41,6 +41,14 @@ export default {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-miterlimit: 10;
-  color: #6ebe3b;
+  color: var(--main-color);
+}
+
+.left-col {
+  width: 34%;
+}
+
+.roght-col {
+  width: 66%;
 }
 </style>

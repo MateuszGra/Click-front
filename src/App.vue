@@ -1,17 +1,23 @@
 <template>
   <Header />
-  <div class="row">
-
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <MessageList />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from './components/Header';
+import MessageList from './components/MessageList';
 
 export default {
   name: 'App',
   components: {
     Header,
+    MessageList,
   },
 };
 </script>
@@ -27,17 +33,16 @@ $base-font-family: 'Roboto', sans-serif;
 $base-line-height: 1.6 !default;
 $base-margin: 1rem !default;
 
-$primary-color: #f37224;
-$secondary-color: #f6f6f6;
-$base-color: #2c3847;
-$background-color: #ffffff;
-$border-color: #ccc;
+:root {
+  --border-color: #e6e6e6;
+  --font-color: #363a3d;
+  --main-color: #6ebe3b;
+  --background-color: #f9f9f9;
+}
 
 html {
   font-family: $base-font-family;
   font-size: $base-font-size;
-  color: $base-color;
-  background: $background-color;
 }
 
 body {
@@ -49,6 +54,7 @@ body {
   overflow-x: hidden;
   font-size: 1rem;
   min-height: 100%;
+  color: var(--font-color);
   &.blocked {
     overflow: hidden;
   }
@@ -128,5 +134,20 @@ p {
 .row {
   display: flex;
   flex-wrap: wrap;
+}
+
+a {
+  color: var(--font-color);
+  text-decoration: none;
+  &:hover {
+    color: var(--main-color);
+  }
+}
+.align-items-center {
+  align-items: center;
+}
+
+.justify-content-center {
+  justify-content: center;
 }
 </style>
