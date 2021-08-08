@@ -5,6 +5,7 @@ export const store = new Vuex.Store({
     messageID: '',
     search: '',
     filter: 'date,asc',
+    ajax: false,
   },
   mutations: {
     changeMessageID(state, newID) {
@@ -15,6 +16,9 @@ export const store = new Vuex.Store({
     },
     changeFilter(state, filter) {
       this.state.filter = filter;
+    },
+    changeAjaxState(state, boolien) {
+      this.state.ajax = boolien;
     },
   },
 });

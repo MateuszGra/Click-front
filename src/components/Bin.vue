@@ -26,9 +26,13 @@ export default {
   },
   methods: {
     remove() {
+      this.$store.commit('changeAjaxState', true);
       fetch(`${API_URL}/messages/delete?id=${this.messageID}`, {
         method: 'DELETE',
-      }).then(() => this.$emit('refresh'));
+      }).then(() => {
+        this.$emit('refresh');
+        this.$store.commit('changeAjaxState', false);
+      });
     },
   },
 };

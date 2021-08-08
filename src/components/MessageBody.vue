@@ -24,6 +24,7 @@ export default {
   computed: mapState(['messageID']),
   watch: {
     messageID(newValue) {
+      this.$store.commit('changeAjaxState', true);
       fetch(`${API_URL}/messages/get-one?id=${newValue}`)
         .then((response) => response.json())
         .then((data) => {
@@ -32,6 +33,7 @@ export default {
           } else {
             this.currentMessage = {};
           }
+          this.$store.commit('changeAjaxState', false);
         });
     },
   },

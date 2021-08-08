@@ -50,6 +50,7 @@ export default {
 
   methods: {
     fetchMessageList() {
+      this.$store.commit('changeAjaxState', true);
       const page = 1;
       const sort = this.$store.state.filter.split(',');
       let url = `${API_URL}/messages?page=${page}&filter=${sort[0]}&order=${sort[1]}`;
@@ -67,6 +68,7 @@ export default {
           } else {
             this.$store.commit('changeMessageID', '');
           }
+          this.$store.commit('changeAjaxState', false);
         });
     },
 
