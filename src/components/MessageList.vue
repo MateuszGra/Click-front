@@ -15,15 +15,20 @@
           <p class="date">{{ changeDateFormat(message.date) }}</p>
         </div>
       </div>
+      <Bin @refresh="fetchMessageList(1, 'date', 'asc')" :messageID="message.id" />
     </li>
   </ul>
 </template>
 
 <script>
 import { API_URL } from '../apiconfig';
+import Bin from './Bin';
 
 export default {
   name: 'MessageList',
+  components: {
+    Bin,
+  },
 
   data() {
     return {
@@ -100,6 +105,7 @@ export default {
   }
 
   &-item {
+    position: relative;
     border: 1px solid var(--border-color);
     border-bottom: none;
     padding: 0.5rem 1rem;
