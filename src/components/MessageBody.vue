@@ -5,7 +5,7 @@
         <a href=":mailto: currentMessage.sender">{{ currentMessage.sender }}</a>
         <h2>{{ currentMessage.name }}</h2>
       </div>
-      <!--    <div class="content" v-html="currentMessage.messageBody.content"></div>-->
+      <div class="content" v-html="currentMessage.messageBody.content"></div>
     </div>
   </div>
 </template>
