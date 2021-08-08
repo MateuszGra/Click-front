@@ -1,7 +1,8 @@
 <template>
   <Header />
   <div class="container">
-    <div class="row mt-1">
+    <search />
+    <div class="row">
       <MessageList />
       <MessageBody />
     </div>
@@ -12,6 +13,7 @@
 import Header from './components/Header';
 import MessageList from './components/MessageList';
 import MessageBody from './components/MessageBody';
+import Search from './components/Search';
 
 export default {
   name: 'App',
@@ -19,6 +21,7 @@ export default {
     Header,
     MessageList,
     MessageBody,
+    Search,
   },
   created() {},
 };
@@ -155,9 +158,5 @@ a {
 
 .justify-content-center {
   justify-content: center;
-}
-
-.mt-1 {
-  margin-top: 2rem;
 }
 </style>

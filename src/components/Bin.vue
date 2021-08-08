@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .button {
   position: absolute;
   background: none;

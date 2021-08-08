@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .message-body {
-  width: 66%;
+  width: 67%;
   min-height: 100%;
   max-height: 100%;
   border: 1px solid var(--border-color);
