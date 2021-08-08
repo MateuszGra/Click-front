@@ -23,9 +23,11 @@
 <script>
 import { API_URL } from '../apiconfig';
 import Bin from './Bin';
+import { mapState } from 'vuex';
 
 export default {
   name: 'MessageList',
+  computed: mapState(['filter', 'search']),
   components: {
     Bin,
   },
@@ -37,13 +39,34 @@ export default {
     };
   },
 
+  watch: {
+    filter() {
+      this.fetchMessageList();
+    },
+    search() {
+      this.fetchMessageList();
+    },
+  },
+
   methods: {
-    fetchMessageList(page, filter, order) {
-      fetch(`${API_URL}/messages?page=${page}&filter=${filter}&order=${order}`)
+    fetchMessageList() {
+      const page = 1;
+      const sort = this.$store.state.filter.split(',');
+      let url = `${API_URL}/messages?page=${page}&filter=${sort[0]}&order=${sort[1]}`;
+      const search = this.$store.state.search;
+      if (search !== '') {
+        url += `&search=${search}`;
+      }
+
+      fetch(url)
         .then((response) => response.json())
         .then((data) => {
           this.messageList = data.items;
-          this.$store.commit('changeMessageID', data.items[0].id);
+          if (data.items.length) {
+            this.$store.commit('changeMessageID', data.items[0].id);
+          } else {
+            this.$store.commit('changeMessageID', '');
+          }
         });
     },
 
@@ -78,9 +101,11 @@ export default {
   list-style: none;
   padding: 0;
   margin: 0;
+  min-height: 80vh;
   max-height: 80vh;
   overflow: auto;
   width: 33%;
+  border: 1px solid var(--border-color);
 
   &-icon {
     width: 2rem;
@@ -106,14 +131,13 @@ export default {
 
   &-item {
     position: relative;
-    border: 1px solid var(--border-color);
-    border-bottom: none;
+    border-bottom: 1px solid var(--border-color);
     padding: 0.5rem 1rem;
     cursor: pointer;
     background: var(--background-color);
 
     &:last-of-type {
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: none;
     }
 
     &:hover {

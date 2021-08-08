@@ -1,13 +1,21 @@
 <template>
   <div class="search">
-    <input class="search-input" type="search" placeholder="Search message..." />
-    <select>
-      <option selected value="2">Newest to oldest</option>
-      <option value="3">Oldest to newest</option>
-      <option value="4">Sender A-Z</option>
-      <option value="5">Sender Z-A</option>
-      <option value="6">Importance highest to lowest</option>
-      <option value="6">Importance lowest to highest</option>
+    <input
+      v-model="search"
+      class="search-input"
+      type="search"
+      placeholder="Search message..."
+      @keyup="$store.commit('changeSearch', search)"
+    />
+    <select v-model="key" @change="$store.commit('changeFilter', key)">
+      <option selected value="date,asc">Newest to oldest</option>
+      <option value="date,desc" selected>Oldest to newest</option>
+      <option value="sender,asc">Sender A-Z</option>
+      <option value="sender,desc">Sender Z-A</option>
+      <option value="name,asc">Name A-Z</option>
+      <option value="name,desc">Name Z-A</option>
+      <option value="type,desc">Importance highest to lowest</option>
+      <option value="type,asc">Importance lowest to highest</option>
     </select>
   </div>
 </template>

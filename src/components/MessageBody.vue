@@ -1,10 +1,12 @@
 <template>
   <div class="message-body">
-    <div class="message-meta">
-      <a href=":mailto: currentMessage.sender">{{ currentMessage.sender }}</a>
-      <h2>{{ currentMessage.name }}</h2>
+    <div v-if="currentMessage.name">
+      <div class="message-meta">
+        <a href=":mailto: currentMessage.sender">{{ currentMessage.sender }}</a>
+        <h2>{{ currentMessage.name }}</h2>
+      </div>
+      <!--    <div class="content" v-html="currentMessage.messageBody.content"></div>-->
     </div>
-    <!--    <div class="content" v-html="currentMessage.messageBody.content"></div>-->
   </div>
 </template>
 
@@ -24,7 +26,13 @@ export default {
     messageID(newValue) {
       fetch(`${API_URL}/messages/get-one?id=${newValue}`)
         .then((response) => response.json())
-        .then((data) => (this.currentMessage = data.items[0]));
+        .then((data) => {
+          if (this.$store.state.messageID !== '') {
+            this.currentMessage = data.items[0];
+          } else {
+            this.currentMessage = {};
+          }
+        });
     },
   },
 };
