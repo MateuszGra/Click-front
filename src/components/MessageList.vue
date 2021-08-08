@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <li class="list-item" v-for="message in messageList" :key="message.id">
+    <li class="list-item" v-for="message in messageList" :key="message.id" :click="$emit('messageId', message.id)">
       <div class="row align-items-center">
         <img class="list-icon" v-if="message.type < 2" src="../assets/mail.svg" />
         <img class="list-icon" v-else src="../assets/warning.svg" />
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       messageList: [],
+      content: '',
     };
   },
 

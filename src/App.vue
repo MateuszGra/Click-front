@@ -2,9 +2,8 @@
   <Header />
   <div class="container">
     <div class="row">
-      <div class="col">
-        <MessageList />
-      </div>
+      <MessageList />
+      <MessageBody />
     </div>
   </div>
 </template>
@@ -12,13 +11,16 @@
 <script>
 import Header from './components/Header';
 import MessageList from './components/MessageList';
+import MessageBody from './components/MessageBody';
 
 export default {
   name: 'App',
   components: {
     Header,
     MessageList,
+    MessageBody,
   },
+  created() {},
 };
 </script>
 
