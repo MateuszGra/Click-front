@@ -1,7 +1,7 @@
 <template>
   <Header />
   <div class="container">
-    <div class="row">
+    <div class="row mt-1">
       <MessageList />
       <MessageBody />
     </div>
@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  box-sizing: border-box;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
 
 $base-font-size: 20px !default;
@@ -151,5 +155,9 @@ a {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.mt-1 {
+  margin-top: 2rem;
 }
 </style>

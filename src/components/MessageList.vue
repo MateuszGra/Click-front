@@ -1,12 +1,18 @@
 <template>
   <ul class="list">
-    <li class="list-item" v-for="message in messageList" :key="message.id" :click="$emit('messageId', message.id)">
+    <li
+      class="list-item"
+      v-for="message in messageList"
+      :key="message.id"
+      @click="$store.commit('changeMessageID', message.id)"
+    >
       <div class="row align-items-center">
         <img class="list-icon" v-if="message.type < 2" src="../assets/mail.svg" />
         <img class="list-icon" v-else src="../assets/warning.svg" />
-        <div>
+        <div class="item-meta">
           <a class="sender" href="mailto: message.sender">{{ message.sender }}</a>
           <p class="subject">{{ message.name }}</p>
+          <p class="date">{{ changeDateFormat(message.date) }}</p>
         </div>
       </div>
     </li>
@@ -30,7 +36,29 @@ export default {
     fetchMessageList(page, filter, order) {
       fetch(`${API_URL}/messages?page=${page}&filter=${filter}&order=${order}`)
         .then((response) => response.json())
-        .then((data) => (this.messageList = data.items));
+        .then((data) => {
+          this.messageList = data.items;
+          this.$store.commit('changeMessageID', data.items[0].id);
+        });
+    },
+
+    changeDateFormat(dateISOformat) {
+      const date = new Date(dateISOformat);
+      const month = date.getMonth() + 1;
+      const dt = date.getDate();
+      const year = date.getFullYear();
+      const hour = date.getHours();
+      const minute = date.getDate();
+      const secound = date.getSeconds();
+
+      const addZero = (number) => {
+        if (number < 10) {
+          return `0${number}`;
+        }
+        return number;
+      };
+
+      return `${year}-${addZero(month)}-${addZero(dt)} ${addZero(hour)}:${addZero(minute)}:${addZero(secound)}`;
     },
   },
 
@@ -44,8 +72,10 @@ export default {
 .list {
   list-style: none;
   padding: 0;
+  margin: 0;
   max-height: 80vh;
   overflow: auto;
+  width: 33%;
 
   &-icon {
     width: 2rem;
@@ -79,17 +109,27 @@ export default {
     &:last-of-type {
       border-bottom: 1px solid var(--border-color);
     }
+
+    &:hover {
+      background: #ffffff;
+    }
   }
 
-  .sender {
+  .sender,
+  .date {
     font-weight: 300;
     font-size: 0.8rem;
+    margin: 0;
   }
 
   .subject {
     font-weight: 500;
-    font-size: 0.9rem;
-    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    margin: 0.4rem 0;
+  }
+
+  .item-meta {
+    max-width: calc(100% - 5rem);
   }
 }
 </style>
