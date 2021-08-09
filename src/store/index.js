@@ -4,7 +4,7 @@ export const store = new Vuex.Store({
   state: {
     messageID: '',
     search: '',
-    filter: 'date,asc',
+    filter: 'date,desc',
     ajax: false,
   },
   mutations: {
