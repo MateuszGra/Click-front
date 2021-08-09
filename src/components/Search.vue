@@ -8,8 +8,8 @@
       @keyup="$store.commit('changeSearch', search)"
     />
     <select v-model="key" @change="$store.commit('changeFilter', key)">
-      <option value="date,asc">Newest to oldest</option>
-      <option value="date,desc">Oldest to newest</option>
+      <option value="date,desc">Newest to oldest</option>
+      <option value="date,asc">Oldest to newest</option>
       <option value="sender,asc">Sender A-Z</option>
       <option value="sender,desc">Sender Z-A</option>
       <option value="name,asc">Name A-Z</option>
@@ -28,7 +28,7 @@ export default {
   components: { Loader },
   data() {
     return {
-      key: 'date,asc',
+      key: 'date,desc',
       search: '',
     };
   },
