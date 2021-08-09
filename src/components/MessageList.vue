@@ -10,7 +10,7 @@
         <img class="list-icon" v-if="message.type < 2" src="../assets/mail.svg" />
         <img class="list-icon" v-else src="../assets/warning.svg" />
         <div class="item-meta">
-          <a class="sender" href="mailto: message.sender">{{ message.sender }}</a>
+          <a class="sender" :href="`mailto: ${message.sender}`">{{ message.sender }}</a>
           <p class="subject">{{ message.name }}</p>
           <p class="date">{{ changeDateFormat(message.date) }}</p>
         </div>
